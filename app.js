@@ -38,6 +38,24 @@ app.get('/heroes/detalle/:id?', (req, res) => {
     
 });
 
+//Solución Propuesta por  Mariano
+app.get('/heroes/detalleMariano/:id', (req, res) => {
+    let respuesta = "";
+    let heroeID = req.params.id;
+    for (const iterator of heroes) {
+        if (iterator.id == heroeID) {
+            respuesta = `Hola, mi nombre es ${iterator.nombre} y soy ${iterator.profesion}`;
+        } 
+    }
+    if(respuesta==""){
+        respuesta = `No encontramos a ese heroe`;
+    }
+    res.send(respuesta);
+});
+
+
+
+
 //Esta es mi propuesta de solución - Es otra forma de hacer lo mismo - Es sólo para que lo tengan popr allí y mas nada. 
 // Ruta /heroes/detalle/id ➝ se envía el nombre y profesión del héroe que pida el usuario
 app.get('/heroes/detalleDaniel/:id', (req, res) => {
@@ -82,6 +100,9 @@ app.get('*', (req, res) => {
 
 //Como levarntar o activar un servidor en express
 //app.listen(3000, ()=>console.log('Sevidor corriendo en el puerto 3000'));
+
+
+
 
 app.listen(3000,function(){
     console.log('Sevidor corriendo en el puerto 3000');
